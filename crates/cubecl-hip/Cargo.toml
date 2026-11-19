@@ -44,30 +44,33 @@ tracing = [
 ]
 
 [dependencies]
+# tommymcc fork: the other cubecl crates come from crates.io at exactly this
+# release rather than by path, so a git dependency on this crate alone builds
+# against the same cubecl as everything else.
 # Runtime Deps
 log = { workspace = true }
 tracing = { workspace = true, features = ["attributes"], optional = true }
 
-cubecl-common = { workspace = true, default-features = true, features = [
+cubecl-common = { version = "=0.12.0-pre.2", default-features = true, features = [
     "std",
     "hash",
 ] }
-cubecl-environment = { workspace = true }
-cubecl-core = { workspace = true, features = [
+cubecl-environment = { version = "=0.12.0-pre.2", default-features = false }
+cubecl-core = { version = "=0.12.0-pre.2", default-features = false, features = [
     "amd",
 ] }
-cubecl-cpp = { workspace = true, features = [
+cubecl-cpp = { version = "=0.12.0-pre.2", default-features = false, features = [
 ] }
 cubecl-hip-sys = { version = "7.14.6085001" }
-cubecl-llvm = { workspace = true, features = [
+cubecl-llvm = { version = "=0.12.0-pre.2", default-features = false, features = [
     "std",
     "amdgpu",
 ] }
-cubecl-monitoring = { workspace = true, features = [
+cubecl-monitoring = { version = "=0.12.0-pre.2", default-features = false, features = [
     "amdgpu-busy-percent",
     "gpu-engine-counters",
 ] }
-cubecl-server = { workspace = true }
+cubecl-server = { version = "=0.12.0-pre.2", default-features = false }
 
 bytemuck = { workspace = true }
 
@@ -78,10 +81,10 @@ paste = { workspace = true }
 serde = { workspace = true }
 
 [dev-dependencies]
-cubecl-core = { workspace = true, default-features = true, features = [
+cubecl-core = { version = "=0.12.0-pre.2", default-features = true, features = [
     "export_tests",
 ] }
-cubecl-std = { workspace = true, default-features = true, features = [
+cubecl-std = { version = "=0.12.0-pre.2", default-features = true, features = [
     "export_tests",
 ] }
 test-log = { workspace = true, features = ["trace"] }
