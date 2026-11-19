@@ -28,6 +28,12 @@ pub struct GpuResource {
     pub binding: cubecl_hip_sys::hipDeviceptr_t,
     /// The size of the resource.
     pub size: u64,
+    /// The HIP stream that work on the resource is queued on, as
+    /// [`HipServer::get_resource`](crate::compute::HipServer) hands it out (null
+    /// elsewhere): work queued on it from outside CubeCL, such as a hipBLAS
+    /// call on the resource, runs in order with CubeCL's own launches.
+    #[new(value = "core::ptr::null_mut()")]
+    pub stream: cubecl_hip_sys::hipStream_t,
 }
 
 impl GpuStorage {
